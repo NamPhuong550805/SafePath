@@ -1,0 +1,43 @@
+﻿<Window x:Class="SafePathFinder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Đường Đi An Toàn - Tấn Lưu" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen" Background="#f0f4f8">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="🛣️ ĐƯỜNG ĐI AN TOÀN TỪ NHÀ ➝ TRƯỜNG"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="#2c3e50" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock Text="Kích thước bản đồ (n × n):" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="SizeTextBox" Width="60" Margin="0,0,10,0"/>
+                <Button Content="📐 Tạo Bản Đồ" Click="GenerateMap_Click" Width="120" Margin="0,0,10,0" Background="#3498db" Foreground="White"/>
+                <Button Content="🧭 Tính Đường Đi" Click="CalculatePaths_Click" Width="130" Margin="0,0,10,0" Background="#2ecc71" Foreground="White"/>
+                <Button Content="🔄 Reset" Click="Reset_Click" Width="80" Background="#e67e22" Foreground="White"/>
+            </StackPanel>
+
+            <UniformGrid x:Name="MapGrid" Rows="1" Columns="1" Margin="0,10,0,10" HorizontalAlignment="Center"/>
+
+            <TextBlock x:Name="ErrorTextBlock" Foreground="Red" FontWeight="Bold" Margin="0,0,0,10" TextWrapping="Wrap" />
+
+            <TextBlock Text="📋 Danh sách các đường đi an toàn (chỉ đi qua phải hoặc xuống dưới):" FontWeight="Bold" FontSize="18" Margin="0,20,0,10"/>
+
+            <!-- Số lượng đường đi -->
+            <TextBlock x:Name="PathCountTextBlock" FontWeight="Bold" FontSize="16" Foreground="#2c3e50" Margin="0,10,0,10"/>
+
+            <ScrollViewer Height="250" VerticalScrollBarVisibility="Auto">
+                <ListBox x:Name="PathsListPanel" BorderBrush="Gray" BorderThickness="1" Background="WhiteSmoke">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="{Binding}" Width="700" TextWrapping="Wrap"/>
+                                <Button Content="Xem" Click="ViewPath_Click" Tag="{Binding}" Width="60" Background="#9b59b6" Foreground="White" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
